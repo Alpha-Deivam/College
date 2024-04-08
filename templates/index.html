@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Navigator</title>
+    <style>
+        /* Style for the button */
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Add shadow */
+        }
+
+        /* Change color and add shadow on hover */
+        button:hover {
+            background-color: #45a049; /* Darker Green */
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 30px 0 rgba(0, 0, 0, 0.19); /* Larger shadow */
+        }
+
+        /* Style for the container */
+        .container {
+            text-align: center;
+            margin-top: 50px;
+            animation-name: slideIn;
+            animation-duration: 1s;
+        }
+
+        /* Keyframes for sliding animation */
+        @keyframes slideIn {
+            from {
+                margin-top: -100px;
+                opacity: 0;
+            }
+            to {
+                margin-top: 50px;
+                opacity: 1;
+            }
+        }
+
+        /* Style for the info list */
+        .info-list {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        /* Style for the marquee */
+        .marquee {
+            font-size: 36px; /* Larger font size */
+            color: #007bff; /* Blue color */
+        }
+
+        /* Style for the select box */
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #007bff; /* Blue border */
+            border-radius: 10px; /* Rounded corners */
+            background-color: #f8f9fa; /* Light gray background */
+            color: #007bff; /* Blue text color */
+            appearance: none; /* Remove default arrow */
+        }
+
+        /* Style for the select box options */
+        select option {
+            background-color: #f8f9fa; /* Light gray background */
+            color: #007bff; /* Blue text color */
+        }
+
+        /* Style for the select box on hover */
+        select:hover {
+            border-color: #0056b3; /* Darker blue border color */
+        }
+    </style>
+</head>
+<body>
+    <marquee class="marquee" behavior="scroll" direction="right" scrollamount="10">VJCET</marquee>
+    <div class="container">
+        <h1>Welcome to College Navigator</h1>
+        <p>Before you proceed, here are some key locations:</p>
+        <ul class="info-list">
+            <li>1 After Destination Shows Path from Gate from MVPA</li>
+            <li>2 After Destination Shows Path from Gate from TDPA</li>
+	    <li>Principal's Office: C Block</li>
+            <li>College Office: C Block</li>
+            <li>Kiosk: C and D Block</li>
+            <li>Placement Cell: A Block</li>
+        </ul>
+        <h2>Select a Path:</h2>
+        <form action="/display_map" method="POST">
+            <select name="path_name">
+                {% for path in paths %}
+                    <option value="{{ path }}">{{ path|replace('Gate', '')|replace('.geojson', '') }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button type="submit">Navigate</button>
+        </form>
+    </div>
+</body>
+</html>
